@@ -397,6 +397,121 @@ function initObserver() {
   });
 }
 
+// ─── CHATBOT ─────────────────────────────────────────
+
+const CHAT_QUESTIONS = {
+  start: {
+    msg: "Bonjour ! 😊 Bienvenue à l'Institut de Beauté 2 Rue des Lilas. Comment puis-je vous aider aujourd'hui ?",
+    options: [
+      { text: "Prendre RDV", next: "booking" },
+      { text: "Tarifs & Soins", next: "pricing" },
+      { text: "Horaires & Accès", next: "info" }
+    ]
+  },
+  booking: {
+    msg: "Super ! Vous pouvez réserver tous nos soins en ligne sur notre plateforme sécurisée.<br><br><a href='" + BOOKING_URL + "' target='_blank'>Cliquez ici pour réserver</a>",
+    options: [
+      { text: "Retour menu", next: "start" }
+    ]
+  },
+  pricing: {
+    msg: "Nos tarifs varient selon les soins. Que recherchez-vous ?",
+    options: [
+      { text: "Massages", next: "price_massages" },
+      { text: "Soins Visage", next: "price_visage" },
+      { text: "Beauté (Cils/Ongles)", next: "price_beaute" },
+      { text: "Retour", next: "start" }
+    ]
+  },
+  price_massages: {
+    msg: "Nos massages corps (Signature, 5 Continents, Amincissant) varient entre 60 CHF (30min) et 150 CHF (1h20).",
+    options: [
+      { text: "Prendre RDV", next: "booking" },
+      { text: "Autre tarif", next: "pricing" }
+    ]
+  },
+  price_visage: {
+    msg: "Nos soins visage classiques et anti-âge (Guinot, senShâ) vont de 120 CHF à 165 CHF. Les massages visages (Kobido) débutent à 59 CHF.",
+    options: [
+      { text: "Prendre RDV", next: "booking" },
+      { text: "Autre tarif", next: "pricing" }
+    ]
+  },
+  price_beaute: {
+    msg: "Pose de vernis semi-permanent dès 60 CHF. Extensions de cils dès 85 CHF. Épilation dès 15 CHF.",
+    options: [
+      { text: "Prendre RDV", next: "booking" },
+      { text: "Catalogue complet", next: "catalog" }
+    ]
+  },
+  catalog: {
+    msg: "Découvrez notre catalogue complet de +90 soins dans la section 'Nos Soins' !",
+    options: [
+      { text: "Menu principal", next: "start" }
+    ]
+  },
+  info: {
+    msg: "📍 <b>Adresse</b> : Rue des Lilas 2, 1202 Genève<br>🕐 <b>Horaires</b> : Lun-Sam 9h à 19h.<br>📞 <b>Tél</b> : 022 340 20 60",
+    options: [
+      { text: "Prendre RDV", next: "booking" },
+      { text: "Menu principal", next: "start" }
+    ]
+  }
+};
+
+const chatbotToggle = document.getElementById('chatbotToggle');
+const chatbotClose = document.getElementById('chatbotClose');
+const chatbotContainer = document.getElementById('chatbot');
+const chatbotMessages = document.getElementById('chatbotMessages');
+const chatbotSuggestions = document.getElementById('chatbotSuggestions');
+
+let chatbotOpen = false;
+
+function toggleChatbot() {
+  chatbotOpen = !chatbotOpen;
+  if(chatbotOpen) {
+    chatbotContainer.classList.add('active');
+    if(chatbotMessages.children.length === 0) {
+      renderChatNode('start');
+    }
+  } else {
+    chatbotContainer.classList.remove('active');
+  }
+}
+
+chatbotToggle.addEventListener('click', toggleChatbot);
+chatbotClose.addEventListener('click', toggleChatbot);
+
+function addChatMessage(text, sender) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `chatbot__msg chatbot__msg--${sender}`;
+  msgDiv.innerHTML = text;
+  chatbotMessages.appendChild(msgDiv);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+function renderChatNode(nodeKey) {
+  const node = CHAT_QUESTIONS[nodeKey];
+  if(!node) return;
+  chatbotSuggestions.innerHTML = '';
+  chatbotSuggestions.style.opacity = '0';
+  
+  setTimeout(() => {
+    addChatMessage(node.msg, 'bot');
+    node.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'chatbot__suggestion-btn';
+      btn.textContent = opt.text;
+      btn.onclick = () => {
+        addChatMessage(opt.text, 'user');
+        renderChatNode(opt.next);
+      };
+      chatbotSuggestions.appendChild(btn);
+    });
+    chatbotSuggestions.style.opacity = '1';
+  }, 400);
+}
+
 // ─── INIT ────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   renderServices();

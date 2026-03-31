@@ -313,6 +313,35 @@
     <img src="" alt="" id="lightboxImg">
   </div>
 
+  <!-- Chatbot -->
+  <div class="chatbot" id="chatbot">
+    <button class="chatbot__toggle" id="chatbotToggle" aria-label="Ouvrir le chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <div class="chatbot__window" id="chatbotWindow">
+      <div class="chatbot__header">
+        <div class="chatbot__header-info">
+          <div class="chatbot__avatar">L</div>
+          <div>
+            <h4>Institut des Lilas</h4>
+            <p>En ligne</p>
+          </div>
+        </div>
+        <button class="chatbot__close" id="chatbotClose" aria-label="Fermer le chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="chatbot__messages" id="chatbotMessages">
+        <!-- Messages will be injected here -->
+      </div>
+      <div class="chatbot__input">
+        <div class="chatbot__suggestions" id="chatbotSuggestions">
+          <!-- Suggestion buttons injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
