@@ -6,153 +6,201 @@
 const BOOKING_URL = 'https://booking.localsearch.ch/bookings/institut-de-beaute-2rue-des-lilas/services?locale=fr&origin=searchch';
 
 const SERVICE_CATEGORIES = [
-  { name: 'Maquillage Semi-Permanent', note: 'Un acompte de 50% vous sera demandé', services: [
-    { name: 'Ras de cils', duration: '2h30', price: 'CHF 250.–', desc: 'Pigmentation fine au ras des cils pour intensifier subtilement le regard sans effet maquillé.' },
-    { name: 'Eyeliner poudrée', duration: '3h00', price: 'CHF 350.–', desc: 'Trait de liner sur mesure pour structurer et agrandir le regard.' },
-    { name: 'Lèvres', duration: '3h00', price: 'CHF 490.–', desc: 'Pigmentation pour redessiner le contour et raviver la couleur naturelle.' },
-    { name: 'Sourcils — Shading', duration: '3h30', price: 'CHF 490.–', desc: 'Technique d\'ombrage créant un effet poudré et structuré.' },
-    { name: 'Microblading poil à poil', duration: '2h15', price: 'CHF 450.–', desc: 'Fines lignes imitant les poils naturels pour un résultat harmonieux.' },
-    { name: 'Retouche annuelle Microblading', duration: '1h30', price: 'CHF 150.–' },
-  ]},
-  { name: 'Épilation Cire à Bandes', services: [
-    { name: '1/2 jambes', duration: '30 min', price: 'CHF 50.–' },
-    { name: '1/2 jambes + bikini classique OU aisselles', duration: '30 min', price: 'CHF 70.–' },
-    { name: '1/2 jambes + bikini classique + aisselles', duration: '45 min', price: 'CHF 75.–' },
-    { name: 'Jambes complètes bikini classique inclu', duration: '45 min', price: 'CHF 80.–' },
-    { name: 'Jambes complètes + bikini classique + aisselles', duration: '1h00', price: 'CHF 90.–' },
-    { name: 'Aisselles OU bikini classique', duration: '15 min', price: 'CHF 25.–' },
-    { name: 'Bikini brésilien', duration: '30 min', price: 'CHF 35.–' },
-    { name: 'Bikini intégral', duration: '30 min', price: 'CHF 40.–' },
-    { name: 'Lèvre supérieure', duration: '15 min', price: 'CHF 15.–' },
-    { name: 'Sourcils', duration: '15 min', price: 'CHF 18.–' },
-    { name: 'Lèvre supérieure ET sourcils', duration: '30 min', price: 'CHF 27.–' },
-    { name: 'Visage', duration: '30 min', price: 'CHF 30.–' },
-    { name: 'Bras', duration: '30 min', price: 'CHF 30.–' },
-    { name: 'Bras complets', duration: '30 min', price: 'CHF 40.–' },
-    { name: 'Dos', duration: '30 min', price: 'CHF 45.–' },
-  ]},
-  { name: 'Épilation Cire Pelable', services: [
-    { name: 'Bikini classique ou aisselles', duration: '30 min', price: 'CHF 25.–' },
-    { name: 'Bikini brésilien', duration: '30 min', price: 'CHF 35.–' },
-    { name: 'Bikini intégral', duration: '30 min', price: 'CHF 40.–' },
-  ]},
-  { name: 'Épilation au Fil', services: [
-    { name: 'Sourcils au fil', duration: '25 min', price: 'CHF 25.–' },
-    { name: 'Lèvre sup. au fil', duration: '15 min', price: 'CHF 15.–' },
-    { name: 'Sourcils et lèvre sup. au fil', duration: '30 min', price: 'CHF 35.–' },
-    { name: 'Visage au fil', duration: '30 min', price: 'CHF 40.–' },
-  ]},
-  { name: 'Extensions de Cils', services: [
-    { name: 'Pose complète volume russe', duration: '2h00', price: 'CHF 159.–' },
-    { name: 'Remplissage volume russe', duration: '1h30', price: 'CHF 87.–' },
-    { name: 'Pose complète cils à cils', duration: '1h30', price: 'CHF 139.–' },
-    { name: 'Remplissage cils à cils', duration: '1h00', price: 'CHF 75.–' },
-    { name: 'Pose clin d\'œil', duration: '1h00', price: 'CHF 85.–', desc: 'Pose cils à cils sur la partie extérieure de l\'œil pour ouvrir le regard.' },
-    { name: 'Retrait d\'extension de cils', duration: '15 min', price: 'CHF 25.–' },
-  ]},
-  { name: 'Rehaussement Cils & Brow Lift', services: [
-    { name: 'Rehaussement cils + teinture', duration: '1h15', price: 'CHF 95.–', desc: 'Rehaussement de cils naturels avec botox et teinture.' },
-    { name: 'Rehaussement cils sans teinture', duration: '1h00', price: 'CHF 79.–' },
-    { name: 'Brow Lift avec teinture', duration: '45 min', price: 'CHF 79.–', desc: 'Fixez et restructurez vos sourcils pour un aspect soigné.' },
-    { name: 'Brow Lift', duration: '45 min', price: 'CHF 59.–' },
-    { name: 'Rehaussement de cils + Brow Lift', duration: '1h15', price: 'CHF 125.–' },
-    { name: 'Rehaussement + Brow Lift (avec teintures)', duration: '1h30', price: 'CHF 155.–' },
-  ]},
-  { name: 'Gel', services: [
-    { name: 'Pose Gel (couleur ou french)', duration: '1h15', price: 'CHF 100.–' },
-    { name: 'RM (dépose + remplissage gel)', duration: '1h15', price: 'CHF 85.–' },
-    { name: 'Renforcement', duration: '1h00', price: 'CHF 65.–' },
-    { name: 'Mini ABO 5x remplissage gel', duration: '1h15', price: 'CHF 383.–', desc: 'Au lieu de 425.–' },
-  ]},
-  { name: 'Semi-Permanent', services: [
-    { name: 'Pose mains', duration: '45 min', price: 'CHF 60.–' },
-    { name: 'Pose pieds', duration: '45 min', price: 'CHF 60.–' },
-    { name: 'Remplissage mains (dépose + pose)', duration: '1h00', price: 'CHF 65.–' },
-    { name: 'Remplissage pieds (dépose + pose)', duration: '1h00', price: 'CHF 65.–' },
-    { name: 'Dépose', duration: '30 min', price: 'CHF 25.–' },
-    { name: 'Abonnement 10x', duration: '1h00', price: 'CHF 589.–' },
-    { name: 'Mini abonnement 5x', duration: '1h00', price: 'CHF 293.–', desc: 'Au lieu de 325.–' },
-  ]},
-  { name: 'Soins des Mains', services: [
-    { name: 'Pose de vernis', duration: '30 min', price: 'CHF 25.–' },
-    { name: 'Manucure', duration: '45 min', price: 'CHF 49.–' },
-    { name: 'Soin paraffine', duration: '30 min', price: 'CHF 40.–', desc: '+ Beauté des mains : 69.– CHF' },
-    { name: 'Abonnement manucure 10x', duration: '45 min', price: 'CHF 439.–' },
-  ]},
-  { name: 'Soins des Pieds', services: [
-    { name: 'Massage des pieds', duration: '30 min', price: 'CHF 55.–' },
-    { name: 'Pose de vernis', duration: '30 min', price: 'CHF 25.–' },
-    { name: 'Beauté des pieds + vernis', duration: '1h00', price: 'CHF 75.–' },
-    { name: 'SPA des pieds', duration: '1h15', price: 'CHF 100.–', desc: 'Cuticules, callosités, gommage, masque, massage et vernis.' },
-    { name: 'BP semi (beauté des pieds + semi)', duration: '1h15', price: 'CHF 105.–' },
-    { name: 'Remplissage pieds semi-permanent', duration: '1h00', price: 'CHF 65.–' },
-  ]},
-  { name: 'Soins Visage — Skin Regimen & senShâ', services: [
-    { name: 'Soin visage classique', duration: '1h00', price: 'CHF 120.–', desc: 'Double nettoyage, exfoliation, massage technique et masque adapté.' },
-    { name: 'Soin visage classique avec extraction', duration: '1h30', price: 'CHF 150.–', desc: 'Nettoyage, exfoliation, bain de vapeur, massage et masque.' },
-  ]},
-  { name: 'Soins Visage Guinot', services: [
-    { name: 'Age Summum', duration: '1h00', price: 'CHF 145.–', desc: 'Soin traitant des signes de l\'âge.' },
-    { name: 'Age Summum + extraction', duration: '1h30', price: 'CHF 165.–' },
-  ]},
-  { name: 'Soins Visage Bio & Naturels', services: [
-    { name: 'Soins by Sam 60mn', duration: '1h00', price: 'CHF 120.–' },
-    { name: 'Soins by Sam 90mn', duration: '1h30', price: 'CHF 150.–' },
-  ]},
-  { name: 'Soin Ado (12-18 ans)', services: [
-    { name: 'Soin ado', duration: '1h00', price: 'CHF 79.–', desc: 'Démaquillage, nettoyage, exfoliation, vapeur, extraction, haute fréquence, masque.' },
-  ]},
-  { name: 'Massages Visage', services: [
-    { name: 'Kobido Gua Sha — Découverte', duration: '30 min', price: 'CHF 59.–', desc: 'Soin sur mesure : kobido, stretching, gua sha, acupression.' },
-    { name: 'Kobido Gua Sha 75mn', duration: '1h15', price: 'CHF 140.–', desc: 'Détente profonde et visage lumineux.' },
-    { name: 'Deep Facelift Ritual', duration: '50 min', price: 'CHF 120.–', desc: 'Massage intra-buccal pour détendre les muscles du visage.' },
-    { name: 'Soin LHL', duration: '1h20', price: 'CHF 150.–', desc: 'Massage des 5 Continents — craniosacral, shiatsu, yoga du visage.' },
-  ]},
-  { name: 'Massages Corps', services: [
-    { name: 'Massage signature 30 min', duration: '30 min', price: 'CHF 60.–' },
-    { name: 'Massage signature 75 min', duration: '1h15', price: 'CHF 125.–', desc: 'Entièrement personnalisable pour répondre à vos besoins.' },
-    { name: 'Massage des 5 Continents', duration: '1h20', price: 'CHF 150.–', desc: 'Technique unique combinant Shiatsu, Lomi-Lomi, Ayurveda et massage suédois.' },
-    { name: 'Massage amincissant', duration: '1h00', price: 'CHF 120.–', desc: 'Combat la peau d\'orange, modèle, lisse, raffermit et tonifie.' },
-    { name: 'Massage amincissant 30 min', duration: '30 min', price: 'CHF 60.–' },
-    { name: 'Expanse Therapy', duration: '1h15', price: 'CHF 125.–', desc: 'Soin global crâne-cœur-ventre avec sonothérapie et huiles essentielles.' },
-    { name: 'Massage à la bougie', duration: '1h00', price: 'CHF 120.–', desc: 'Laissez-vous envahir par cette douce chaleur.' },
-  ]},
-  { name: 'Soins du Corps', services: [
-    { name: 'Soin corps (gommage + massage)', duration: '1h00', price: 'CHF 120.–' },
-  ]},
-  { name: 'Soin Énergétique', services: [
-    { name: 'Soin Sungate', duration: '30 min', price: 'CHF 65.–', desc: 'Aide à la prise de décisions, libère les blocages et restructure l\'énergie vitale.' },
-  ]},
-  { name: 'Microneedling', services: [
-    { name: 'Microneedling — séance', duration: '1h00', price: 'CHF 140.–', desc: 'Teint uniforme, hydratation immédiate, coup d\'éclat instantané.' },
-    { name: 'Microneedling — pack 3 séances', duration: '1h00', price: 'CHF 379.–' },
-  ]},
-  { name: 'LPG / Endermolift Anti-Âge', services: [
-    { name: 'Anti-âge repulpant', duration: '35 min', price: 'CHF 120.–' },
-    { name: 'Anti-âge fermeté', duration: '35 min', price: 'CHF 120.–' },
-    { name: 'Anti-âge affinant', duration: '35 min', price: 'CHF 120.–' },
-    { name: 'Zone frontale', duration: '15 min', price: 'CHF 40.–' },
-    { name: 'Détox', duration: '25 min', price: 'Sur devis' },
-    { name: 'Éclat', duration: '20 min', price: 'Sur devis' },
-    { name: 'Total regard', duration: '25 min', price: 'Sur devis' },
-  ]},
-  { name: 'Teintures', services: [
-    { name: 'Teinture des cils', duration: '30 min', price: 'CHF 35.–' },
-    { name: 'Teinture des sourcils', duration: '20 min', price: 'CHF 25.–' },
-    { name: 'Teinture cils + sourcils', duration: '45 min', price: 'CHF 45.–' },
-  ]},
-  { name: 'Épilation Électrique', note: 'Abonnement 10h = 990.–', services: [
-    { name: 'EE 15 minutes', duration: '15 min', price: 'CHF 28.–' },
-    { name: 'EE 30 minutes', duration: '30 min', price: 'CHF 55.–' },
-    { name: 'EE 1 heure', duration: '1h00', price: 'CHF 110.–' },
-  ]},
-  { name: 'Suppléments', services: [
-    { name: 'Ongle cassé', duration: '15 min', price: 'CHF 10.–' },
-    { name: 'Dépose', duration: '30 min', price: 'CHF 40.–' },
-  ]},
-  { name: 'Petite Princesse (- 12 ans)', services: [
-    { name: 'Beauté des mains pour les moins de 12 ans', duration: '30 min', price: 'CHF 40.–' },
-  ]},
+  {
+    name: 'Maquillage Semi-Permanent', note: 'Un acompte de 50% vous sera demandé', services: [
+      { name: 'Ras de cils', duration: '2h30', price: 'CHF 250.–', desc: 'Pigmentation fine au ras des cils pour intensifier subtilement le regard sans effet maquillé.' },
+      { name: 'Eyeliner poudrée', duration: '3h00', price: 'CHF 350.–', desc: 'Trait de liner sur mesure pour structurer et agrandir le regard.' },
+      { name: 'Lèvres', duration: '3h00', price: 'CHF 490.–', desc: 'Pigmentation pour redessiner le contour et raviver la couleur naturelle.' },
+      { name: 'Sourcils — Shading', duration: '3h30', price: 'CHF 490.–', desc: 'Technique d\'ombrage créant un effet poudré et structuré.' },
+      { name: 'Microblading poil à poil', duration: '2h15', price: 'CHF 450.–', desc: 'Fines lignes imitant les poils naturels pour un résultat harmonieux.' },
+      { name: 'Retouche annuelle Microblading', duration: '1h30', price: 'CHF 150.–' },
+    ]
+  },
+  {
+    name: 'Épilation Cire à Bandes', services: [
+      { name: '1/2 jambes', duration: '30 min', price: 'CHF 50.–' },
+      { name: '1/2 jambes + bikini classique OU aisselles', duration: '30 min', price: 'CHF 70.–' },
+      { name: '1/2 jambes + bikini classique + aisselles', duration: '45 min', price: 'CHF 75.–' },
+      { name: 'Jambes complètes bikini classique inclu', duration: '45 min', price: 'CHF 80.–' },
+      { name: 'Jambes complètes + bikini classique + aisselles', duration: '1h00', price: 'CHF 90.–' },
+      { name: 'Aisselles OU bikini classique', duration: '15 min', price: 'CHF 25.–' },
+      { name: 'Bikini brésilien', duration: '30 min', price: 'CHF 35.–' },
+      { name: 'Bikini intégral', duration: '30 min', price: 'CHF 40.–' },
+      { name: 'Lèvre supérieure', duration: '15 min', price: 'CHF 15.–' },
+      { name: 'Sourcils', duration: '15 min', price: 'CHF 18.–' },
+      { name: 'Lèvre supérieure ET sourcils', duration: '30 min', price: 'CHF 27.–' },
+      { name: 'Visage', duration: '30 min', price: 'CHF 30.–' },
+      { name: 'Bras', duration: '30 min', price: 'CHF 30.–' },
+      { name: 'Bras complets', duration: '30 min', price: 'CHF 40.–' },
+      { name: 'Dos', duration: '30 min', price: 'CHF 45.–' },
+    ]
+  },
+  {
+    name: 'Épilation Cire Pelable', services: [
+      { name: 'Bikini classique ou aisselles', duration: '30 min', price: 'CHF 25.–' },
+      { name: 'Bikini brésilien', duration: '30 min', price: 'CHF 35.–' },
+      { name: 'Bikini intégral', duration: '30 min', price: 'CHF 40.–' },
+    ]
+  },
+  {
+    name: 'Épilation au Fil', services: [
+      { name: 'Sourcils au fil', duration: '25 min', price: 'CHF 25.–' },
+      { name: 'Lèvre sup. au fil', duration: '15 min', price: 'CHF 15.–' },
+      { name: 'Sourcils et lèvre sup. au fil', duration: '30 min', price: 'CHF 35.–' },
+      { name: 'Visage au fil', duration: '30 min', price: 'CHF 40.–' },
+    ]
+  },
+  {
+    name: 'Extensions de Cils', services: [
+      { name: 'Pose complète volume russe', duration: '2h00', price: 'CHF 159.–' },
+      { name: 'Remplissage volume russe', duration: '1h30', price: 'CHF 87.–' },
+      { name: 'Pose complète cils à cils', duration: '1h30', price: 'CHF 139.–' },
+      { name: 'Remplissage cils à cils', duration: '1h00', price: 'CHF 75.–' },
+      { name: 'Pose clin d\'œil', duration: '1h00', price: 'CHF 85.–', desc: 'Pose cils à cils sur la partie extérieure de l\'œil pour ouvrir le regard.' },
+      { name: 'Retrait d\'extension de cils', duration: '15 min', price: 'CHF 25.–' },
+    ]
+  },
+  {
+    name: 'Rehaussement Cils & Brow Lift', services: [
+      { name: 'Rehaussement cils + teinture', duration: '1h15', price: 'CHF 95.–', desc: 'Rehaussement de cils naturels avec botox et teinture.' },
+      { name: 'Rehaussement cils sans teinture', duration: '1h00', price: 'CHF 79.–' },
+      { name: 'Brow Lift avec teinture', duration: '45 min', price: 'CHF 79.–', desc: 'Fixez et restructurez vos sourcils pour un aspect soigné.' },
+      { name: 'Brow Lift', duration: '45 min', price: 'CHF 59.–' },
+      { name: 'Rehaussement de cils + Brow Lift', duration: '1h15', price: 'CHF 125.–' },
+      { name: 'Rehaussement + Brow Lift (avec teintures)', duration: '1h30', price: 'CHF 155.–' },
+    ]
+  },
+  {
+    name: 'Gel', services: [
+      { name: 'Pose Gel (couleur ou french)', duration: '1h15', price: 'CHF 100.–' },
+      { name: 'RM (dépose + remplissage gel)', duration: '1h15', price: 'CHF 85.–' },
+      { name: 'Renforcement', duration: '1h00', price: 'CHF 65.–' },
+      { name: 'Mini ABO 5x remplissage gel', duration: '1h15', price: 'CHF 383.–', desc: 'Au lieu de 425.–' },
+    ]
+  },
+  {
+    name: 'Semi-Permanent', services: [
+      { name: 'Pose mains', duration: '45 min', price: 'CHF 60.–' },
+      { name: 'Pose pieds', duration: '45 min', price: 'CHF 60.–' },
+      { name: 'Remplissage mains (dépose + pose)', duration: '1h00', price: 'CHF 65.–' },
+      { name: 'Remplissage pieds (dépose + pose)', duration: '1h00', price: 'CHF 65.–' },
+      { name: 'Dépose', duration: '30 min', price: 'CHF 25.–' },
+      { name: 'Abonnement 10x', duration: '1h00', price: 'CHF 589.–' },
+      { name: 'Mini abonnement 5x', duration: '1h00', price: 'CHF 293.–', desc: 'Au lieu de 325.–' },
+    ]
+  },
+  {
+    name: 'Soins des Mains', services: [
+      { name: 'Pose de vernis', duration: '30 min', price: 'CHF 25.–' },
+      { name: 'Manucure', duration: '45 min', price: 'CHF 49.–' },
+      { name: 'Soin paraffine', duration: '30 min', price: 'CHF 40.–', desc: '+ Beauté des mains : 69.– CHF' },
+      { name: 'Abonnement manucure 10x', duration: '45 min', price: 'CHF 439.–' },
+    ]
+  },
+  {
+    name: 'Soins des Pieds', services: [
+      { name: 'Massage des pieds', duration: '30 min', price: 'CHF 55.–' },
+      { name: 'Pose de vernis', duration: '30 min', price: 'CHF 25.–' },
+      { name: 'Beauté des pieds + vernis', duration: '1h00', price: 'CHF 75.–' },
+      { name: 'SPA des pieds', duration: '1h15', price: 'CHF 100.–', desc: 'Cuticules, callosités, gommage, masque, massage et vernis.' },
+      { name: 'BP semi (beauté des pieds + semi)', duration: '1h15', price: 'CHF 105.–' },
+      { name: 'Remplissage pieds semi-permanent', duration: '1h00', price: 'CHF 65.–' },
+    ]
+  },
+  {
+    name: 'Soins Visage — Skin Regimen & senShâ', services: [
+      { name: 'Soin visage classique', duration: '1h00', price: 'CHF 120.–', desc: 'Double nettoyage, exfoliation, massage technique et masque adapté.' },
+      { name: 'Soin visage classique avec extraction', duration: '1h30', price: 'CHF 150.–', desc: 'Nettoyage, exfoliation, bain de vapeur, massage et masque.' },
+    ]
+  },
+  {
+    name: 'Soins Visage Guinot', services: [
+      { name: 'Age Summum', duration: '1h00', price: 'CHF 145.–', desc: 'Soin traitant des signes de l\'âge.' },
+      { name: 'Age Summum + extraction', duration: '1h30', price: 'CHF 165.–' },
+    ]
+  },
+  {
+    name: 'Soins Visage Bio & Naturels', services: [
+      { name: 'Soins by Sam 60mn', duration: '1h00', price: 'CHF 120.–' },
+      { name: 'Soins by Sam 90mn', duration: '1h30', price: 'CHF 150.–' },
+    ]
+  },
+  {
+    name: 'Soin Ado (12-18 ans)', services: [
+      { name: 'Soin ado', duration: '1h00', price: 'CHF 79.–', desc: 'Démaquillage, nettoyage, exfoliation, vapeur, extraction, haute fréquence, masque.' },
+    ]
+  },
+  {
+    name: 'Massages Visage', services: [
+      { name: 'Kobido Gua Sha — Découverte', duration: '30 min', price: 'CHF 59.–', desc: 'Soin sur mesure : kobido, stretching, gua sha, acupression.' },
+      { name: 'Kobido Gua Sha 75mn', duration: '1h15', price: 'CHF 140.–', desc: 'Détente profonde et visage lumineux.' },
+      { name: 'Deep Facelift Ritual', duration: '50 min', price: 'CHF 120.–', desc: 'Massage intra-buccal pour détendre les muscles du visage.' },
+      { name: 'Soin LHL', duration: '1h20', price: 'CHF 150.–', desc: 'Massage des 5 Continents — craniosacral, shiatsu, yoga du visage.' },
+    ]
+  },
+  {
+    name: 'Massages Corps', services: [
+      { name: 'Massage signature 30 min', duration: '30 min', price: 'CHF 60.–' },
+      { name: 'Massage signature 75 min', duration: '1h15', price: 'CHF 125.–', desc: 'Entièrement personnalisable pour répondre à vos besoins.' },
+      { name: 'Massage des 5 Continents', duration: '1h20', price: 'CHF 150.–', desc: 'Technique unique combinant Shiatsu, Lomi-Lomi, Ayurveda et massage suédois.' },
+      { name: 'Massage amincissant', duration: '1h00', price: 'CHF 120.–', desc: 'Combat la peau d\'orange, modèle, lisse, raffermit et tonifie.' },
+      { name: 'Massage amincissant 30 min', duration: '30 min', price: 'CHF 60.–' },
+      { name: 'Expanse Therapy', duration: '1h15', price: 'CHF 125.–', desc: 'Soin global crâne-cœur-ventre avec sonothérapie et huiles essentielles.' },
+      { name: 'Massage à la bougie', duration: '1h00', price: 'CHF 120.–', desc: 'Laissez-vous envahir par cette douce chaleur.' },
+    ]
+  },
+  {
+    name: 'Soins du Corps', services: [
+      { name: 'Soin corps (gommage + massage)', duration: '1h00', price: 'CHF 120.–' },
+    ]
+  },
+  {
+    name: 'Soin Énergétique', services: [
+      { name: 'Soin Sungate', duration: '30 min', price: 'CHF 65.–', desc: 'Aide à la prise de décisions, libère les blocages et restructure l\'énergie vitale.' },
+    ]
+  },
+  {
+    name: 'Microneedling', services: [
+      { name: 'Microneedling — séance', duration: '1h00', price: 'CHF 140.–', desc: 'Teint uniforme, hydratation immédiate, coup d\'éclat instantané.' },
+      { name: 'Microneedling — pack 3 séances', duration: '1h00', price: 'CHF 379.–' },
+    ]
+  },
+  {
+    name: 'LPG / Endermolift Anti-Âge', services: [
+      { name: 'Anti-âge repulpant', duration: '35 min', price: 'CHF 120.–' },
+      { name: 'Anti-âge fermeté', duration: '35 min', price: 'CHF 120.–' },
+      { name: 'Anti-âge affinant', duration: '35 min', price: 'CHF 120.–' },
+      { name: 'Zone frontale', duration: '15 min', price: 'CHF 40.–' },
+      { name: 'Détox', duration: '25 min', price: 'Sur devis' },
+      { name: 'Éclat', duration: '20 min', price: 'Sur devis' },
+      { name: 'Total regard', duration: '25 min', price: 'Sur devis' },
+    ]
+  },
+  {
+    name: 'Teintures', services: [
+      { name: 'Teinture des cils', duration: '30 min', price: 'CHF 35.–' },
+      { name: 'Teinture des sourcils', duration: '20 min', price: 'CHF 25.–' },
+      { name: 'Teinture cils + sourcils', duration: '45 min', price: 'CHF 45.–' },
+    ]
+  },
+  {
+    name: 'Épilation Électrique', note: 'Abonnement 10h = 990.–', services: [
+      { name: 'EE 15 minutes', duration: '15 min', price: 'CHF 28.–' },
+      { name: 'EE 30 minutes', duration: '30 min', price: 'CHF 55.–' },
+      { name: 'EE 1 heure', duration: '1h00', price: 'CHF 110.–' },
+    ]
+  },
+  {
+    name: 'Suppléments', services: [
+      { name: 'Ongle cassé', duration: '15 min', price: 'CHF 10.–' },
+      { name: 'Dépose', duration: '30 min', price: 'CHF 40.–' },
+    ]
+  },
+  {
+    name: 'Petite Princesse (- 12 ans)', services: [
+      { name: 'Beauté des mains pour les moins de 12 ans', duration: '30 min', price: 'CHF 40.–' },
+    ]
+  },
 ];
 
 const TEAM = [
@@ -469,9 +517,9 @@ let chatbotOpen = false;
 
 function toggleChatbot() {
   chatbotOpen = !chatbotOpen;
-  if(chatbotOpen) {
+  if (chatbotOpen) {
     chatbotContainer.classList.add('active');
-    if(chatbotMessages.children.length === 0) {
+    if (chatbotMessages.children.length === 0) {
       renderChatNode('start');
     }
   } else {
@@ -492,10 +540,10 @@ function addChatMessage(text, sender) {
 
 function renderChatNode(nodeKey) {
   const node = CHAT_QUESTIONS[nodeKey];
-  if(!node) return;
+  if (!node) return;
   chatbotSuggestions.innerHTML = '';
   chatbotSuggestions.style.opacity = '0';
-  
+
   setTimeout(() => {
     addChatMessage(node.msg, 'bot');
     node.options.forEach(opt => {
